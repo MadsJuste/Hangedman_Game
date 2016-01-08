@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:id="@+id/edtxtplayed"
+        android:id="@+id/edtxtPlayed"
         android:layout_gravity="right"
         android:text="0" />
 
