@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import org.w3c.dom.Text;
+
 /**
  * Created by Konstantin on 08-01-2016.
  */
@@ -16,6 +18,7 @@ public class LanguageFragment extends Fragment implements View.OnClickListener{
 
     private Button  btnEn;
     private Button btnDk;
+    private Text txttxt;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.languagefragment, container, false);

@@ -25,4 +25,13 @@
         android:layout_marginStart="60dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Choose language"
+        android:id="@+id/txttxt"
+        android:layout_above="@+id/btnEn"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
