@@ -11,25 +11,25 @@ import java.util.Random;
 
 public class HangedmanLogic {
   private ArrayList<String> possibleWord = new ArrayList<String>();
-  private String Word;
-  private ArrayList<String> UsedLetter = new ArrayList<String>();
-  private String visableWord;
+  private String word;
+  private ArrayList<String> usedLetter = new ArrayList<String>();
+  private String visibleWord;
   private int numberOfWrongWords;
-  private boolean LastLetterWasCorrect;
+  private boolean lastLetterWasCorrect;
   private boolean gameIsWon;
   private boolean gameIsLost;
 
 
   public ArrayList<String> getUsedLetter() {
-    return UsedLetter;
+    return usedLetter;
   }
 
-  public String getVisableWord() {
-    return visableWord;
+  public String getVisibleWord() {
+    return visibleWord;
   }
 
   public String getWord() {
-    return Word;
+    return word;
   }
 
   public int getNumberOfWrongWords() {
@@ -37,7 +37,7 @@ public class HangedmanLogic {
   }
 
   public boolean isLastLetterCorrect() {
-    return LastLetterWasCorrect;
+    return lastLetterWasCorrect;
   }
 
   public boolean isTheGameWon() {
@@ -71,59 +71,59 @@ public class HangedmanLogic {
   }
 
   public void refresh() {
-    UsedLetter.clear();
+    usedLetter.clear();
     numberOfWrongWords = 0;
     gameIsWon = false;
     gameIsLost = false;
-    Word = possibleWord.get(new Random().nextInt(possibleWord.size()));
-    updateVisableWord();
+    word = possibleWord.get(new Random().nextInt(possibleWord.size()));
+    updateVisibleWord();
   }
 
 
-  private void updateVisableWord() {
-    visableWord = "";
+  private void updateVisibleWord() {
+    visibleWord = "";
     gameIsWon = true;
-    for (int n = 0; n < Word.length(); n++) {
-      String Letter = Word.substring(n, n + 1);
-      if (UsedLetter.contains(Letter)) {
-        visableWord = visableWord + Letter;
+    for (int n = 0; n < word.length(); n++) {
+      String Letter = word.substring(n, n + 1);
+      if (usedLetter.contains(Letter)) {
+        visibleWord = visibleWord + Letter;
       } else {
-        visableWord = visableWord + "*";
+        visibleWord = visibleWord + "*";
         gameIsWon = false;
       }
     }
   }
 
-  public void guessLetter(String Letter) {
-    if (Letter.length() != 1) return;
-    if (Letter.equals(" ")) return;
-    System.out.println("your guess on the letter: " + Letter);
-    if (UsedLetter.contains(Letter)) return;
+  public void guessLetter(String letter) {
+    if (letter.length() != 1) return;
+    if (letter.equals(" ")) return;
+    System.out.println("your guess on the letter: " + letter);
+    if (usedLetter.contains(letter)) return;
     if (gameIsWon || gameIsLost) return;
 
-    UsedLetter.add(Letter);
+    usedLetter.add(letter);
 
-    if (Word.contains(Letter)) {
-      LastLetterWasCorrect = true;
-      System.out.println("the letter was correct: " + Letter);
+    if (word.contains(letter)) {
+      lastLetterWasCorrect = true;
+      System.out.println("the letter was correct: " + letter);
     } else {
-      // Vi gættede på et Letter der ikke var i Word.
-      LastLetterWasCorrect = false;
-      System.out.println("the letter was not correct: " + Letter);
+      // Vi gï¿½ttede pï¿½ et letter der ikke var i Word.
+      lastLetterWasCorrect = false;
+      System.out.println("the letter was not correct: " + letter);
       numberOfWrongWords = numberOfWrongWords + 1;
       if (numberOfWrongWords > 6) {
         gameIsLost = true;
       }
     }
-    updateVisableWord();
+    updateVisibleWord();
   }
 
   public void logStatus() {
     System.out.println("---------- ");
-    System.out.println("- Word (hidden) = " + Word);
-    System.out.println("- visable word = " + visableWord);
+    System.out.println("- Word (hidden) = " + word);
+    System.out.println("- visable word = " + visibleWord);
     System.out.println("- wrong letter = " + numberOfWrongWords);
-    System.out.println("- used letters = " + UsedLetter);
+    System.out.println("- used letters = " + usedLetter);
     if (gameIsLost) System.out.println("- Game is Lost");
     if (gameIsWon) System.out.println("- Game is Won");
     System.out.println("---------- ");
@@ -145,10 +145,10 @@ public class HangedmanLogic {
     String data = getUrl("http://dr.dk");
     System.out.println("data = " + data);
     data = data.substring(data.indexOf("<body")).
-            replaceAll("<.+?>", " ").toLowerCase().replaceAll("<[^>]+>"," "). // tilføjet lidt tagremoval
-            replaceAll("[^a-zæøå]", " ").
-            replaceAll(" [a-zæøå] "," "). // fjern 1-Lettersord
-            replaceAll(" [a-zæøå][a-zæøå] "," "); // fjern 2-Lettersord
+            replaceAll("<.+?>", " ").toLowerCase().replaceAll("<[^>]+>"," "). // tilfoejet lidt tagremoval
+            replaceAll("[^a-zÃ¦Ã¸Ã¥]", " ").
+            replaceAll(" [a-zÃ¦Ã¸Ã¥] ", " "). // fjern 1-bogstavsord
+            replaceAll(" [a-zÃ¦Ã¸Ã¥][a-zÃ¦Ã¸Ã¥] ", " "); // fjern 2-bogstavsord
 
     System.out.println("data = " + data);
     possibleWord.clear();
@@ -157,4 +157,20 @@ public class HangedmanLogic {
     System.out.println("possible Word = " + possibleWord);
     refresh();
   }
+
+    public void getWordFromGuardian () throws Exception{
+        String data =getUrl("http://www.theguardian.com/international");
+        System.out.println("data = " + data);
+        data = data.substring(data.indexOf("<body")).
+                replaceAll("<.+?>", " ").toLowerCase().replaceAll("<[^>]+>"," "). // tilfÃ¸jet lidt tagremoval
+                replaceAll("[^a-zÃ¦Ã¸Ã¥]", " ").
+                replaceAll(" [a-zÃ¦Ã¸Ã¥] "," "). // fjern 1-bogstavsord
+                replaceAll(" [a-zÃ¦Ã¸Ã¥][a-zÃ¦Ã¸Ã¥] "," "); // fjern 2-bogstavsord
+        System.out.println("data = " + data);
+        possibleWord.clear();
+        possibleWord.addAll(new HashSet<String>(Arrays.asList(data.split(" "))));
+
+        System.out.println("possible Word = " + possibleWord);
+        refresh();
+    }
 }

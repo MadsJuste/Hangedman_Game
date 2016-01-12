@@ -1,6 +1,5 @@
 package com.example.juste.hangedmangame;
 
-import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -40,7 +39,7 @@ public class hangedmanGame extends AppCompatActivity implements View.OnClickList
                 tw.setText("you have already guessed on this letter");
             }else {
                 logic.guessLetter(charecter);
-                status.setText(logic.getVisableWord());
+                status.setText(logic.getVisibleWord());
                 if (!logic.isLastLetterCorrect()) {
                     guesses.setText(guesses.getText() + " " + charecter);
                 }
